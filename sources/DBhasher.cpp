@@ -193,6 +193,7 @@ void DBhasher::close_both_db() {
   BOOST_LOG_TRIVIAL(info) << "Both databases closed successfully" << std::endl;
 }
 
+
 DBhasher::~DBhasher() {
   delete data_to_hash;
   delete data_to_write;
