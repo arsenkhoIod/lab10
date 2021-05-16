@@ -48,6 +48,10 @@ add_library(${PROJECT_NAME} STATIC
         third-party/PicoSHA2/picosha2.h
         third-party/ThreadPool/ThreadPool.h include/data_piece.hpp include/logger.hpp)
 
+add_executable(create_db
+        ${CMAKE_CURRENT_SOURCE_DIR}/demo/create_db.cpp
+        )
+
 add_executable(dbcs
         ${CMAKE_CURRENT_SOURCE_DIR}/demo/dbcs_main.cpp
         )
@@ -62,6 +66,8 @@ target_link_libraries(${PROJECT_NAME}
         Threads::Threads
         RocksDB::rocksdb
         ${Boost_LIBRARIES})
+
+target_link_libraries(create_db ${PROJECT_NAME})
 
 target_link_libraries(dbcs ${PROJECT_NAME})
 
@@ -98,7 +104,7 @@ endif()
 
 include(CPackConfig.cmake)
 
-install(TARGETS ${PROJECT_NAME} dbcs
+install(TARGETS ${PROJECT_NAME} create_db dbcs
         EXPORT "${PROJECT_NAME}-targets"
         RUNTIME DESTINATION bin
         ARCHIVE DESTINATION lib
